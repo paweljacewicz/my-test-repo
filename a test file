@@ -1,0 +1,17 @@
+Sub CensorText()
+Dim lngIndex As Long
+Dim oRng As Range
+  Set oRng = Selection.Range
+  For lngIndex = 1 To Selection.Characters.Count
+    On Error GoTo Err_Handler
+    Selection.Characters(lngIndex).Text = ChrW(9608)
+Err_ReEntry:
+  Next
+lbl_Exit:
+  Exit Sub
+Err_Handler:
+  Debug.Print Err.Number & " " & Err.Description
+  oRng.Characters(lngIndex) = ChrW(9608)
+  Resume Err_ReEntry
+
+End Sub
